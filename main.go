@@ -2,13 +2,10 @@ package main
 
 import (
 	"bufio"
-	"encoding/hex"
 	"fmt"
 	"math/rand"
 	"os"
 	"strings"
-
-	"google.golang.org/protobuf/proto"
 )
 
 func parseBool(string string) (bool, error) {
