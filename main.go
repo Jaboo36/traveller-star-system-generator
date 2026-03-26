@@ -115,7 +115,19 @@ type hydrographics struct {
 }
 
 func determineHydrographics(atmosphere uint8) hydrographics {
-	hydrographicsProfiles := map[uint8]hydrographics{}
+	hydrographicsProfiles := map[uint8]hydrographics{
+		0:  {0, "0%-5%", "Desert world"},
+		1:  {1, "6%-15%", "Dry world"},
+		2:  {2, "16%-25%", "A few small seas"},
+		3:  {3, "26%-35%", "Small seas and oceans"},
+		4:  {4, "36%-45%", "Wet world"},
+		5:  {5, "46%-55%", "A large ocean"},
+		6:  {6, "56%-65%", "Large oceans"},
+		7:  {7, "66%-75%", "Earth-like world"},
+		8:  {8, "76%-85%", "Only a few islands and archipelagos"},
+		9:  {9, "86%-95%", "Almost entirely water"},
+		10: {0xF, "96%-100%", "Waterworld"},
+	}
 
 	result := roll2D() - 7 + atmosphere
 
