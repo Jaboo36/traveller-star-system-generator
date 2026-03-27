@@ -2,6 +2,7 @@ package main
 
 import (
 	"bufio"
+	"encoding/json"
 	"fmt"
 	"math/rand"
 	"os"
@@ -250,7 +251,7 @@ func determineFactions(government uint8, population uint8) []faction {
 		modifier = 0
 	}
 
-	numberOfFactions := int8(roll2D()) + int8(rollD()) + modifier
+	numberOfFactions := int8(rand.Intn(3)+1) + modifier
 
 	factions := []faction{}
 
@@ -284,7 +285,7 @@ func determineCulturalDifferences() string {
 
 	toInt, err := strconv.ParseUint(result, 10, 8)
 	if err != nil {
-		fmt.Printf("error:", err)
+		fmt.Printf("error: %v", err)
 	}
 
 	culturalDifferences := map[uint8]string{
@@ -326,7 +327,7 @@ func determineCulturalDifferences() string {
 		66: "Unusual Custom: Conspiracy – something strange is going on. The government is being subverted by another group or agency.",
 	}
 
-	return culturalDifferences[toInt]
+	return culturalDifferences[uint8(toInt)]
 }
 
 type lawLevel struct {
@@ -350,6 +351,8 @@ func determineLawLevel(government uint8) lawLevel {
 		8: lawLevel{8, "All bladed weapons, stunners", "All visible armour"},
 		9: lawLevel{9, "All weapons", "All armour"},
 	}
+
+	return lawLevels[result]
 }
 
 type starport struct {
@@ -428,7 +431,7 @@ func determineTechLevel(starport string, size uint8, atmosphere uint8, hydrograp
 	case size < 5:
 		sizeMod = 1
 	default:
-		sizemod = 0
+		sizeMod = 0
 	}
 
 	var atmosphereMod int8
@@ -490,16 +493,26 @@ func main() {
 		starport := determineStarport(population.Id)
 		techLevel := determineTechLevel(starport.Class, planetSize.Id, atmosphere.Id, hydrographics.Id, population.Id, government.Id)
 
-		println(planetSize)
-		println(atmosphere)
-		println(hydrographics)
-		println(temperature)
-		println(population)
-		println(government)
-		println(factions)
-		println(culturalDifferences)
-		println(starport)
-		println(techLevel)
+		sizeJson, _ := json.MarshalIndent(planetSize, "", " ")
+		atmosphereJson, _ := json.MarshalIndent(atmosphere, "", " ")
+		hydroJson, _ := json.MarshalIndent(hydrographics, "", " ")
+		tempJson, _ := json.MarshalIndent(temperature, "", " ")
+		popJson, _ := json.MarshalIndent(population, "", " ")
+		governmentJson, _ := json.MarshalIndent(government, "", " ")
+		factionJson, _ := json.MarshalIndent(factions, "", " ")
+		cultureJson, _ := json.MarshalIndent(culturalDifferences, "", " ")
+		starportJson, _ := json.MarshalIndent(starport, "", " ")
+		techLevelJson, _ := json.MarshalIndent(techLevel, "", " ")
+		fmt.Println(string(sizeJson))
+		fmt.Println(string(atmosphereJson))
+		fmt.Println(string(hydroJson))
+		fmt.Println(string(tempJson))
+		fmt.Println(string(popJson))
+		fmt.Println(string(governmentJson))
+		fmt.Println(string(factionJson))
+		fmt.Println(string(cultureJson))
+		fmt.Println(string(starportJson))
+		fmt.Println(string(techLevelJson))
 
 		fmt.Println("Would you like to continue? yes/no?")
 
