@@ -295,7 +295,7 @@ func determineCulturalDifferences() string {
 		15: "Conservative – the culture resists change and outside influences.",
 		16: "Xenophobic – the culture distrusts outsiders and alien influences. Offworlders will face considerable prejudice.",
 		21: "Taboo – a particular topic is forbidden and cannot be discussed. Travellers who unwittingly mention this topic will be ostracised.",
-		22; "Deceptive – trickery and equivocation are considered acceptable. Honesty is a sign of weakness.",
+		22: "Deceptive – trickery and equivocation are considered acceptable. Honesty is a sign of weakness.",
 		23: "Liberal – the culture welcomes change and offworld influence. Travellers who bring new and strange ideas will be welcomed.",
 		24: "Honourable – one’s word is one’s bond in the culture. Lying is both rare and despised.",
 		25: "Influenced – the culture is heavily influenced by another, neighbouring world. Roll again for a cultural quirk that has been inherited from the culture.",
@@ -330,9 +330,9 @@ func determineCulturalDifferences() string {
 }
 
 type lawLevel struct {
-	Level uint8
+	Level         uint8
 	WeaponsBanned string
-	Armour string	
+	Armour        string
 }
 
 func determineLawLevel(government uint8) lawLevel {
@@ -352,6 +352,129 @@ func determineLawLevel(government uint8) lawLevel {
 	}
 }
 
+type starport struct {
+	Class        string
+	Quality      string
+	BerthingCost string
+	Fuel         string
+	Facilities   string
+	Bases        string
+}
+
+func determineStarport(population uint8) starport {
+	var modifier int8
+	switch {
+	case population == 8 || population == 9:
+		modifier = 1
+	case population >= 10:
+		modifier = 2
+	case population == 3 || population == 4:
+		modifier = -1
+	case population <= 2:
+		modifier = -2
+	default:
+		modifier = 0
+	}
+
+	result := roll2D() + uint8(modifier)
+
+	var starportClass string
+	switch {
+	case result <= 2:
+		starportClass = "X"
+	case result < 5:
+		starportClass = "E"
+	case result < 7:
+		starportClass = "D"
+	case result < 9:
+		starportClass = "C"
+	case result < 11:
+		starportClass = "B"
+	default:
+		starportClass = "A"
+	}
+
+	starports := map[string]starport{
+		"A": starport{"A", "Excellent", "1DxCr1000", "Refined", "Shipyard (all), Repair, Highport 6+", "Military 8+, Naval 8+, Scout 10+"},
+		"B": starport{"B", "Good", "1DxCr500", "Refined", "Shipyard (spacecraft), Repair, Highport 8+", "Military 8+, Naval 8+, Scout 9+"},
+		"C": starport{"C", "Routine", "1DxCr100", "Unrefined", "Shipyard (small craft), Repair, Highport 10+", "Military 10+, Scout 9+"},
+		"D": starport{"D", "Poor", "1DxCr10", "Unrefined", "Limited Repair, Highport 12+", "Scout 8+, Corsair 12+"},
+		"E": starport{"E", "Frontier", "0", "None", "None", "Corsair 10+"},
+		"X": starport{"X", "No Starport", "0", "None", "None", "Corsair 10+"},
+	}
+
+	return starports[starportClass]
+}
+
+func determineTechLevel(starport string, size uint8, atmosphere uint8, hydrographics uint8, population uint8, government uint8) uint8 {
+	var starportMod int8
+	switch {
+	case starport == "A":
+		starportMod = 6
+	case starport == "B":
+		starportMod = 4
+	case starport == "C":
+		starportMod = 2
+	case starport == "X":
+		starportMod = -4
+	default:
+		starportMod = 0
+	}
+
+	var sizeMod int8
+	switch {
+	case size < 2:
+		sizeMod = 2
+	case size < 5:
+		sizeMod = 1
+	default:
+		sizemod = 0
+	}
+
+	var atmosphereMod int8
+	if atmosphere < 4 || (atmosphere <= 0xF && atmosphere >= 0xA) {
+		atmosphereMod = 1
+	} else {
+		atmosphereMod = 0
+	}
+
+	var hydrographicsMod int8
+	switch {
+	case hydrographics == 0 || hydrographics == 9:
+		hydrographicsMod = 1
+	case hydrographics == 0xA:
+		hydrographicsMod = 2
+	default:
+		hydrographicsMod = 0
+	}
+
+	var populationMod int8
+	switch {
+	case (population > 0 && population < 6) || population == 8:
+		populationMod = 1
+	case population == 9:
+		populationMod = 2
+	case population == 0xA:
+		populationMod = 4
+	default:
+		populationMod = 0
+	}
+
+	var governmentMod int8
+	switch {
+	case government == 0 || government == 5:
+		governmentMod = 1
+	case government == 7:
+		governmentMod = 2
+	case government == 13 || government == 14:
+		governmentMod = -2
+	default:
+		governmentMod = 0
+	}
+
+	return rollD() + uint8(starportMod) + uint8(sizeMod) + uint8(atmosphereMod) + uint8(hydrographicsMod) + uint8(populationMod) + uint8(governmentMod)
+}
+
 func main() {
 	cont := true
 
@@ -364,6 +487,19 @@ func main() {
 		government := determineGovernment(population.Id)
 		factions := determineFactions(government.Id, population.Id)
 		culturalDifferences := determineCulturalDifferences()
+		starport := determineStarport(population.Id)
+		techLevel := determineTechLevel(starport.Class, planetSize.Id, atmosphere.Id, hydrographics.Id, population.Id, government.Id)
+
+		println(planetSize)
+		println(atmosphere)
+		println(hydrographics)
+		println(temperature)
+		println(population)
+		println(government)
+		println(factions)
+		println(culturalDifferences)
+		println(starport)
+		println(techLevel)
 
 		fmt.Println("Would you like to continue? yes/no?")
 
