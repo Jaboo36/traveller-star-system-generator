@@ -342,13 +342,13 @@ func determineLawLevel(government uint8) lawLevel {
 		0: lawLevel{0, "No restrictions - heavy armour and a handy weapon recommended...", ""},
 		1: lawLevel{1, "Poison gas, explosives, undetectable weapons, WMD", "Battle dress"},
 		2: lawLevel{2, "Portable energy and laser weapons", "Combat armour"},
-		0: lawLevel{0, "No restrictions - heavy armour and a handy weapon recommended...", ""},
-		0: lawLevel{0, "No restrictions - heavy armour and a handy weapon recommended...", ""},
-		0: lawLevel{0, "No restrictions - heavy armour and a handy weapon recommended...", ""},
-		0: lawLevel{0, "No restrictions - heavy armour and a handy weapon recommended...", ""},
-		0: lawLevel{0, "No restrictions - heavy armour and a handy weapon recommended...", ""},
-		0: lawLevel{0, "No restrictions - heavy armour and a handy weapon recommended...", ""},
-		0: lawLevel{0, "No restrictions - heavy armour and a handy weapon recommended...", ""},
+		3: lawLevel{3, "Military weapons", "Flak"},
+		4: lawLevel{4, "Light assault weapons and submachine guns", "Cloth"},
+		5: lawLevel{5, "Personal concealable weapons", "Mesh"},
+		6: lawLevel{6, "All firearms except shotguns & stunners", ""},
+		7: lawLevel{7, "Shotguns", ""},
+		8: lawLevel{8, "All bladed weapons, stunners", "All visible armour"},
+		9: lawLevel{9, "All weapons", "All armour"},
 	}
 }
 
