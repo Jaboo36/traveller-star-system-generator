@@ -325,6 +325,31 @@ func determineCulturalDifferences() string {
 		65: "Unusual Customs: Travel – Travellers may be distrusted or feted, or perhaps the culture frowns on those who leave their homes.",
 		66: "Unusual Custom: Conspiracy – something strange is going on. The government is being subverted by another group or agency.",
 	}
+
+	return culturalDifferences[toInt]
+}
+
+type lawLevel struct {
+	Level uint8
+	WeaponsBanned string
+	Armour string	
+}
+
+func determineLawLevel(government uint8) lawLevel {
+	result := roll2D() - 7 + government
+
+	lawLevels := map[uint8]lawLevel{
+		0: lawLevel{0, "No restrictions - heavy armour and a handy weapon recommended...", ""},
+		1: lawLevel{1, "Poison gas, explosives, undetectable weapons, WMD", "Battle dress"},
+		2: lawLevel{2, "Portable energy and laser weapons", "Combat armour"},
+		0: lawLevel{0, "No restrictions - heavy armour and a handy weapon recommended...", ""},
+		0: lawLevel{0, "No restrictions - heavy armour and a handy weapon recommended...", ""},
+		0: lawLevel{0, "No restrictions - heavy armour and a handy weapon recommended...", ""},
+		0: lawLevel{0, "No restrictions - heavy armour and a handy weapon recommended...", ""},
+		0: lawLevel{0, "No restrictions - heavy armour and a handy weapon recommended...", ""},
+		0: lawLevel{0, "No restrictions - heavy armour and a handy weapon recommended...", ""},
+		0: lawLevel{0, "No restrictions - heavy armour and a handy weapon recommended...", ""},
+	}
 }
 
 func main() {
@@ -338,6 +363,7 @@ func main() {
 		population := determinePopulation()
 		government := determineGovernment(population.Id)
 		factions := determineFactions(government.Id, population.Id)
+		culturalDifferences := determineCulturalDifferences()
 
 		fmt.Println("Would you like to continue? yes/no?")
 
