@@ -186,19 +186,19 @@ type population struct {
 
 func determinePopulation() population {
 	populations := map[uint8]population{
-		0:   population{0, "None", "0", ""},
-		1:   population{1, "Few", "1+", "A tiny farmstead or a single family"},
-		2:   population{2, "Hundreds", "100+", "A village"},
-		3:   population{3, "Thousands", "1,000+", ""},
-		4:   population{4, "Tens of thousands", "10,000+", "Small town"},
-		5:   population{5, "Hundreds of thousands", "100,000+", "Average city"},
-		6:   population{6, "Millions", "1,000,000+", ""},
-		7:   population{7, "Tens of millions", "10,000,000+", "Large city"},
-		8:   population{8, "Hundreds of millions", "100,000,000+", ""},
-		9:   population{9, "Billions", "1,000,000,000", "Present day Earth"},
-		0xA: population{0xA, "Tens of billions", "10,000,000,000+", ""},
-		0xB: population{0xB, "Hundreds of billions", "100,000,000,000", "Incredibly crowded world"},
-		0xC: population{0xC, "Trillions", "1,000,000,000,000+", "World-city"},
+		0:   {0, "None", "0", ""},
+		1:   {1, "Few", "1+", "A tiny farmstead or a single family"},
+		2:   {2, "Hundreds", "100+", "A village"},
+		3:   {3, "Thousands", "1,000+", ""},
+		4:   {4, "Tens of thousands", "10,000+", "Small town"},
+		5:   {5, "Hundreds of thousands", "100,000+", "Average city"},
+		6:   {6, "Millions", "1,000,000+", ""},
+		7:   {7, "Tens of millions", "10,000,000+", "Large city"},
+		8:   {8, "Hundreds of millions", "100,000,000+", ""},
+		9:   {9, "Billions", "1,000,000,000", "Present day Earth"},
+		0xA: {0xA, "Tens of billions", "10,000,000,000+", ""},
+		0xB: {0xB, "Hundreds of billions", "100,000,000,000", "Incredibly crowded world"},
+		0xC: {0xC, "Trillions", "1,000,000,000,000+", "World-city"},
 	}
 
 	return populations[roll2D()]
@@ -214,22 +214,22 @@ type government struct {
 
 func determineGovernment(population uint8) government {
 	governments := map[uint8]government{
-		0:   government{0, "None", "No government structure. In many cases, family bonds predominate.", "Family, clan, anarchy", []string{}},
-		1:   government{1, "Company/Corporation", "Ruling functions are assumed by a company managerial elite and most citizenry are company employees or dependants.", "Corporate outpost, asteroid mine, feudal domain", []string{"Weapons", "Drugs", "Travellers"}},
-		2:   government{2, "Participating Democracy", "Ruling functions are reached by the advice and consent of the citizenry directly.", "Collective, tribal council, comm-linked consensus", []string{"Drugs"}},
-		3:   government{3, "Self-perpetuating Oligarchy", "Ruling functions are performed by a restricted minority, with little or no input from the mass of citizenry.", "Plutocracy, hereditary ruling caste", []string{"Technology", "Weapons", "Travllers"}},
-		4:   government{4, "Representative Democracy", "Ruling functions are performed by elected representatives.", "Republic, democracy", []string{"Drugs", "Weapons", "Psionics"}},
-		5:   government{5, "Feudal Technocracy", "Ruling functions are performed by specific individuals for persons who agree to be ruled by them. Relationships are based on the performance of technical activities that a mutually beneficial.", "Those with access to advanced technology tend to have higher social status", []string{"Technology", "Weapons", "Computers"}},
-		6:   government{6, "Captive Government", "Ruling functions are performed by an imposed leadership answerable to an outside group.", "A colony or conquered area", []string{"Weapons", "Technology", "Travellers"}},
-		7:   government{7, "Balkanisation", "No central authority exists; rival governments compete for control. Law level refers to the government nearest the starport.", "Multiple governments, civil war", []string{"Varies"}},
-		8:   government{8, "Civil Service Bureaucracy", "Ruling functions are performed by government agencies employing individuals selected to their expertise.", "Technocracy, Communism", []string{"Drugs", "Weapons"}},
-		9:   government{9, "Impersonal Bureaucracy", "Ruling functions are performed by agencies that have become insulated from the governed citizens.", "Entrenched castes of bureaucrats, decaying empire", []string{"Drugs", "Weapons"}},
-		0xA: government{0xA, "Charismatic Dictator", "Ruling functions are performed by agencies directed by a single leader who enjoys the overwhelming confidence of the citizens.", "Revolutionary leader, messiah, emperor", []string{}},
-		0xB: government{0xB, "Non-Charismatic Leader", "A previous charasmatic dictator has been replaced by a leader through normal channels.", "Military dictatorship, hereditary kingship", []string{"Weapons", "Technology", "Computers"}},
-		0xC: government{0xC, "Charismatic Oligarchy", "Ruling funtcions are performed by a select group of members of an organization or class that enjoys the overwhelming confidence of the citizenry.", "Junta, revolutionary council", []string{"Weapons"}},
-		0xD: government{0xD, "Religious Dictatorship", "Ruling functions are performed by a religious organization without regard to the specific individual needs of the citizenry.", "Cult, transcendent philosophy, psionic group mind", []string{"Varies"}},
-		0xE: government{0xE, "Religious Autocracy", "Government by a single religious leader having absolute power over the citizenry.", "Messiah", []string{"Varies"}},
-		0xF: government{0xF, "Totalitarian Oligarchy", "Government by an all-powerful minority which maintains absolute control through widespread coercion and oppression.", "World church, ruthless corporation", []string{"Varies"}},
+		0:   {0, "None", "No government structure. In many cases, family bonds predominate.", "Family, clan, anarchy", []string{}},
+		1:   {1, "Company/Corporation", "Ruling functions are assumed by a company managerial elite and most citizenry are company employees or dependants.", "Corporate outpost, asteroid mine, feudal domain", []string{"Weapons", "Drugs", "Travellers"}},
+		2:   {2, "Participating Democracy", "Ruling functions are reached by the advice and consent of the citizenry directly.", "Collective, tribal council, comm-linked consensus", []string{"Drugs"}},
+		3:   {3, "Self-perpetuating Oligarchy", "Ruling functions are performed by a restricted minority, with little or no input from the mass of citizenry.", "Plutocracy, hereditary ruling caste", []string{"Technology", "Weapons", "Travllers"}},
+		4:   {4, "Representative Democracy", "Ruling functions are performed by elected representatives.", "Republic, democracy", []string{"Drugs", "Weapons", "Psionics"}},
+		5:   {5, "Feudal Technocracy", "Ruling functions are performed by specific individuals for persons who agree to be ruled by them. Relationships are based on the performance of technical activities that a mutually beneficial.", "Those with access to advanced technology tend to have higher social status", []string{"Technology", "Weapons", "Computers"}},
+		6:   {6, "Captive Government", "Ruling functions are performed by an imposed leadership answerable to an outside group.", "A colony or conquered area", []string{"Weapons", "Technology", "Travellers"}},
+		7:   {7, "Balkanisation", "No central authority exists; rival governments compete for control. Law level refers to the government nearest the starport.", "Multiple governments, civil war", []string{"Varies"}},
+		8:   {8, "Civil Service Bureaucracy", "Ruling functions are performed by government agencies employing individuals selected to their expertise.", "Technocracy, Communism", []string{"Drugs", "Weapons"}},
+		9:   {9, "Impersonal Bureaucracy", "Ruling functions are performed by agencies that have become insulated from the governed citizens.", "Entrenched castes of bureaucrats, decaying empire", []string{"Drugs", "Weapons"}},
+		0xA: {0xA, "Charismatic Dictator", "Ruling functions are performed by agencies directed by a single leader who enjoys the overwhelming confidence of the citizens.", "Revolutionary leader, messiah, emperor", []string{}},
+		0xB: {0xB, "Non-Charismatic Leader", "A previous charasmatic dictator has been replaced by a leader through normal channels.", "Military dictatorship, hereditary kingship", []string{"Weapons", "Technology", "Computers"}},
+		0xC: {0xC, "Charismatic Oligarchy", "Ruling funtcions are performed by a select group of members of an organization or class that enjoys the overwhelming confidence of the citizenry.", "Junta, revolutionary council", []string{"Weapons"}},
+		0xD: {0xD, "Religious Dictatorship", "Ruling functions are performed by a religious organization without regard to the specific individual needs of the citizenry.", "Cult, transcendent philosophy, psionic group mind", []string{"Varies"}},
+		0xE: {0xE, "Religious Autocracy", "Government by a single religious leader having absolute power over the citizenry.", "Messiah", []string{"Varies"}},
+		0xF: {0xF, "Totalitarian Oligarchy", "Government by an all-powerful minority which maintains absolute control through widespread coercion and oppression.", "World church, ruthless corporation", []string{"Varies"}},
 	}
 
 	return governments[roll2D()-7+population]
@@ -340,16 +340,16 @@ func determineLawLevel(government uint8) lawLevel {
 	result := roll2D() - 7 + government
 
 	lawLevels := map[uint8]lawLevel{
-		0: lawLevel{0, "No restrictions - heavy armour and a handy weapon recommended...", ""},
-		1: lawLevel{1, "Poison gas, explosives, undetectable weapons, WMD", "Battle dress"},
-		2: lawLevel{2, "Portable energy and laser weapons", "Combat armour"},
-		3: lawLevel{3, "Military weapons", "Flak"},
-		4: lawLevel{4, "Light assault weapons and submachine guns", "Cloth"},
-		5: lawLevel{5, "Personal concealable weapons", "Mesh"},
-		6: lawLevel{6, "All firearms except shotguns & stunners", ""},
-		7: lawLevel{7, "Shotguns", ""},
-		8: lawLevel{8, "All bladed weapons, stunners", "All visible armour"},
-		9: lawLevel{9, "All weapons", "All armour"},
+		0: {0, "No restrictions - heavy armour and a handy weapon recommended...", ""},
+		1: {1, "Poison gas, explosives, undetectable weapons, WMD", "Battle dress"},
+		2: {2, "Portable energy and laser weapons", "Combat armour"},
+		3: {3, "Military weapons", "Flak"},
+		4: {4, "Light assault weapons and submachine guns", "Cloth"},
+		5: {5, "Personal concealable weapons", "Mesh"},
+		6: {6, "All firearms except shotguns & stunners", ""},
+		7: {7, "Shotguns", ""},
+		8: {8, "All bladed weapons, stunners", "All visible armour"},
+		9: {9, "All weapons", "All armour"},
 	}
 
 	return lawLevels[result]
@@ -398,12 +398,12 @@ func determineStarport(population uint8) starport {
 	}
 
 	starports := map[string]starport{
-		"A": starport{"A", "Excellent", "1DxCr1000", "Refined", "Shipyard (all), Repair, Highport 6+", "Military 8+, Naval 8+, Scout 10+"},
-		"B": starport{"B", "Good", "1DxCr500", "Refined", "Shipyard (spacecraft), Repair, Highport 8+", "Military 8+, Naval 8+, Scout 9+"},
-		"C": starport{"C", "Routine", "1DxCr100", "Unrefined", "Shipyard (small craft), Repair, Highport 10+", "Military 10+, Scout 9+"},
-		"D": starport{"D", "Poor", "1DxCr10", "Unrefined", "Limited Repair, Highport 12+", "Scout 8+, Corsair 12+"},
-		"E": starport{"E", "Frontier", "0", "None", "None", "Corsair 10+"},
-		"X": starport{"X", "No Starport", "0", "None", "None", "Corsair 10+"},
+		"A": {"A", "Excellent", "1DxCr1000", "Refined", "Shipyard (all), Repair, Highport 6+", "Military 8+, Naval 8+, Scout 10+"},
+		"B": {"B", "Good", "1DxCr500", "Refined", "Shipyard (spacecraft), Repair, Highport 8+", "Military 8+, Naval 8+, Scout 9+"},
+		"C": {"C", "Routine", "1DxCr100", "Unrefined", "Shipyard (small craft), Repair, Highport 10+", "Military 10+, Scout 9+"},
+		"D": {"D", "Poor", "1DxCr10", "Unrefined", "Limited Repair, Highport 12+", "Scout 8+, Corsair 12+"},
+		"E": {"E", "Frontier", "0", "None", "None", "Corsair 10+"},
+		"X": {"X", "No Starport", "0", "None", "None", "Corsair 10+"},
 	}
 
 	return starports[starportClass]
